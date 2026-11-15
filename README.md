@@ -23,9 +23,8 @@ Download the zip for your browser from the [Releases](../../releases) page, or u
 3. Click **Load unpacked** and pick the folder that contains `manifest.json`.
 
 **Firefox** (`firefox/`)
-- Quick test: `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → pick `manifest.json`. It's removed when Firefox closes.
-- Permanent: sign it for free at [addons.mozilla.org/developers](https://addons.mozilla.org/developers/) using **"On your own"** (unlisted), then install the signed `.xpi`.
-  See `firefox/README.md` for details.
+- If the release has a `*-signed.xpi` file, click it and Firefox installs it permanently.
+- Otherwise, for a quick test: `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → pick `manifest.json`. It's removed when Firefox closes.
 
 ## Privacy
 - **Permissions:** only `storage` (your settings, kept locally) and `activeTab`. The Firefox version also declares `<all_urls>` so it can run on pages.
@@ -48,7 +47,12 @@ Releases are created automatically by GitHub Actions (`.github/workflows/release
 2. Raise `"version"` in **both** `manifest.json` files to the same new number (e.g. `1.3.1` → `1.4.0`).
 3. Push to `main`. GitHub builds the two zips, creates the tag `v<version>` and publishes the release.
 
-If the two versions don't match, the workflow stops with an error. You can also run it by hand from the **Actions** tab ("Release" → **Run workflow**).
+If the two versions don't match, the workflow stops with an error.
+
+**Signed Firefox builds (optional):** add the repository secrets `AMO_JWT_ISSUER` and `AMO_JWT_SECRET`
+(from addons.mozilla.org → Developer Hub → *Manage API Keys*). The workflow then gets the Firefox build signed by Mozilla
+as an *unlisted* add-on (not published on the store) and attaches the `.xpi` to the release.
+For a release that already exists, run the workflow by hand from the Actions tab. You can also run it by hand from the **Actions** tab ("Release" → **Run workflow**).
 
 ## License
 MIT. See [LICENSE](LICENSE).

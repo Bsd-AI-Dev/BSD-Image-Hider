@@ -62,3 +62,34 @@ jobs:
             --target "${{ github.sha }}" \
             --title "BSD Image Hider v$V" \
             --notes-file .github/release-notes.md
+
+      # ---- Optional: Mozilla-signed Firefox .xpi (permanent one-click install) ----
+      # Runs only if the repo has the secrets AMO_JWT_ISSUER and AMO_JWT_SECRET
+      # (addons.mozilla.org → Developer Hub → Manage API Keys). Signs as "unlisted":
+      # the add-on is NOT published on the Firefox store, Mozilla only signs the file.
+      # Also works for an existing release: Actions → Release → Run workflow.
+      - name: Sign Firefox add-on
+        env:
+          GH_TOKEN: ${{ github.token }}
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          V=${{ steps.v.outputs.version }}
+          if [ -z "$AMO_JWT_ISSUER" ] || [ -z "$AMO_JWT_SECRET" ]; then
+            echo "No Mozilla API keys set, skipping Firefox signing."
+            exit 0
+          fi
+          if gh release view "v$V" --json assets --jq '.assets[].name' | grep -q '\.xpi$'; then
+            echo "Release v$V already has a signed .xpi, skipping."
+            exit 0
+          fi
+          npx --yes web-ext@8 sign \
+            --source-dir firefox \
+            --channel unlisted \
+            --api-key "$AMO_JWT_ISSUER" \
+            --api-secret "$AMO_JWT_SECRET" \
+            --approval-timeout 900000 \
+            --artifacts-dir signed
+          XPI=$(ls signed/*.xpi | head -1)
+          cp "$XPI" "bsd-image-hider-firefox-v$V-signed.xpi"
+          gh release upload "v$V" "bsd-image-hider-firefox-v$V-signed.xpi" --clobber
