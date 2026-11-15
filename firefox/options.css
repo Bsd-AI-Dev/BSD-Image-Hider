@@ -1,0 +1,19 @@
+body { max-width: 640px; margin: 30px auto; font: 14px/1.5 system-ui, sans-serif; color: #222; padding: 0 16px; }
+h1 { font-size: 21px; } h2 { font-size: 16px; margin-top: 28px; } h3 { font-size: 14px; margin: 18px 0 4px; }
+textarea { width: 100%; box-sizing: border-box; font: 13px ui-monospace, monospace; padding: 8px; }
+button { padding: 6px 16px; margin-top: 6px; }
+code, kbd { background: #eee; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+kbd { border: 1px solid #ccc; }
+.status { color: #2a7a2a; margin-left: 8px; }
+.muted { color: #666; }
+#minSize { width: 60px; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 13px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #ddd; vertical-align: top; }
+th { background: #f3f4f6; }
+.tip { background: #eef3ff; padding: 10px 12px; border-radius: 6px; }
+@media (prefers-color-scheme: dark) {
+  body { background: #1e1e1e; color: #eee; } code, kbd { background: #333; } kbd { border-color: #555; }
+  textarea { background: #2a2a2a; color: #eee; border-color: #555; }
+  th { background: #2a2a2a; } th, td { border-color: #444; } .muted { color: #aaa; } .tip { background: #2a3350; }
+  a { color: #8ab4ff; }
+}

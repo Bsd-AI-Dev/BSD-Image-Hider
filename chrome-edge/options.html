@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Private Image Hider – Settings</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <h1>Private Image Hider – Settings</h1>
+  <p class="muted">New here? <a href="help.html" target="_blank">Read how to use the extension</a>.</p>
+
+  <h2>Show images on…</h2>
+  <p>Sites or pages where images are <b>shown</b>. Everywhere else they are hidden. One entry per line.</p>
+  <textarea id="showList" rows="8" spellcheck="false" placeholder="contoso.com&#10;fabrikam.com/home.html&#10;fabrikam.com/gallery/*"></textarea>
+
+  <h2>Always hide images on…</h2>
+  <p>Pages where images stay <b>hidden</b> even if the site is in the list above. This list always wins.</p>
+  <textarea id="hideList" rows="6" spellcheck="false" placeholder="contoso.com/home.html&#10;contoso.com/news/*"></textarea>
+
+  <table class="formats">
+    <tr><th>You type</th><th>It covers</th></tr>
+    <tr><td><code>contoso.com</code></td><td>The whole site, including subdomains like shop.contoso.com</td></tr>
+    <tr><td><code>contoso.com/home.html</code></td><td>Exactly that one page (anything after <code>?</code> or <code>#</code> is ignored)</td></tr>
+    <tr><td><code>contoso.com/</code></td><td>Only the site’s front page</td></tr>
+    <tr><td><code>contoso.com/blog/*</code></td><td>Every page whose address starts with contoso.com/blog/</td></tr>
+    <tr><td><code>recipes</code></td><td>Any address containing the word “recipes”</td></tr>
+  </table>
+  <p class="muted">You can paste full addresses like https://www.contoso.com/home.html; they’re tidied up when you save.</p>
+  <div><button id="save">Save lists</button> <span id="status" class="status"></span></div>
+
+  <h2>Small images</h2>
+  <label><input type="checkbox" id="hideSmall"> Hide small icons and logos too (including inline SVG icons)</label>
+  <p id="sizeRow">Otherwise, keep images visible when narrower or shorter than
+     <input type="number" id="minSize" min="0" max="500"> px</p>
+  <div><button id="saveSize">Save</button> <span id="sizeStatus" class="status"></span></div>
+
+  <h2>Privacy</h2>
+  <p>This extension has no network access, no analytics and no remote code. Settings are stored only in this browser.</p>
+  <script src="rules.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

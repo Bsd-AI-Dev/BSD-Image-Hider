@@ -1,0 +1,23 @@
+body { width: 280px; margin: 0; padding: 10px; font: 13px system-ui, sans-serif; color: #222; }
+.head { font-weight: 600; margin-bottom: 2px; display: flex; justify-content: space-between; align-items: center; }
+.help { font-weight: 400; font-size: 12px; }
+.site { color: #666; font-size: 12px; margin-bottom: 6px; word-break: break-all; }
+.status { font-size: 12px; padding: 6px 8px; border-radius: 6px; background: #eef3ff; margin-bottom: 6px; }
+.status.shown { background: #e8f6ea; }
+.group { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #888; margin: 10px 0 2px; }
+button { display: block; width: 100%; margin: 4px 0; padding: 7px 8px; text-align: left;
+  border: 1px solid #ccd; border-radius: 6px; background: #f6f7f9; cursor: pointer; font: inherit; color: inherit; }
+button:hover { background: #eceef2; }
+button:disabled { opacity: .5; cursor: default; }
+button.on { background: #fff3d6; border-color: #e6c46a; }
+button.warn.on { background: #fde4e4; border-color: #e19a9a; }
+.links { margin-top: 10px; font-size: 12px; }
+a { color: #2a5bd7; }
+@media (prefers-color-scheme: dark) {
+  body { background: #222; color: #eee; } .site { color: #aaa; }
+  .status { background: #2a3350; } .status.shown { background: #23402a; }
+  button { background: #333; border-color: #555; } button:hover { background: #3c3c3c; }
+  button.on { background: #4a3d16; border-color: #8a7120; } button.warn.on { background: #4a2020; border-color: #8a3a3a; }
+  a { color: #8ab4ff; }
+}
+[hidden] { display: none !important; }

@@ -1,0 +1,31 @@
+/* Only active while <html> has class pih-on. Removing that class restores everything. */
+
+/* <img>, <video>, <input type=image>: push the picture out of its box and paint a texture instead.
+   Layout and size stay exactly the same, so pages don't break. */
+html.pih-on img:not(.pih-show):not(.pih-small),
+html.pih-on video:not(.pih-show):not(.pih-small),
+html.pih-on input[type="image"]:not(.pih-show):not(.pih-small) {
+  object-position: -99999px -99999px !important;
+  background-image: repeating-linear-gradient(45deg, #c9ccd1 0 6px, #b7bbc2 6px 12px) !important;
+  background-size: auto !important;
+  background-repeat: repeat !important;
+}
+
+/* SVG <image> elements and <canvas> just fade out */
+html.pih-on svg image:not(.pih-show),
+html.pih-on canvas.pih-canvas:not(.pih-show) {
+  opacity: 0 !important;
+}
+
+/* Inline SVG icons and logos (only when "Hide small icons and logos too" is on) */
+html.pih-on.pih-svg svg:not(.pih-show) {
+  background-image: repeating-linear-gradient(45deg, #c9ccd1 0 3px, #b7bbc2 3px 6px) !important;
+}
+html.pih-on.pih-svg svg:not(.pih-show) > * {
+  visibility: hidden !important;
+}
+
+/* Elements with CSS background images (marked by content.js) */
+html.pih-on .pih-bg:not(.pih-show) {
+  background-image: repeating-linear-gradient(45deg, #c9ccd1 0 6px, #b7bbc2 6px 12px) !important;
+}

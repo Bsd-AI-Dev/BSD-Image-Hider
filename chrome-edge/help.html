@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Private Image Hider – How to use</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <h1>Private Image Hider – How to use</h1>
+  <p>Images on websites are replaced by a grey striped box. The page layout stays the same, so websites keep working.
+     You decide where images are shown.</p>
+
+  <p class="tip"><b>Tip:</b> pin the extension so its button is always visible. Click the puzzle-piece icon in the
+     toolbar, then the pin next to <i>Private Image Hider</i>.</p>
+
+  <h2>1. Show a single image</h2>
+  <p>Move the mouse over a hidden image. A small <b>👁</b> appears in its corner. Click it to show that image.
+     Click <b>↺</b> to hide it again.</p>
+  <p>Keyboard: hover the image and press <kbd>Alt</kbd>+<kbd>A</kbd> to show it, <kbd>Alt</kbd>+<kbd>Z</kbd> to hide it.</p>
+
+  <h2>2. The toolbar button</h2>
+  <p>Click the extension’s button to see what’s happening on the current page and change it.</p>
+  <table>
+    <tr><th>Button</th><th>What it does</th></tr>
+    <tr><td>Show images on whole site</td><td>Images are shown on every page of this website.</td></tr>
+    <tr><td>Show images on this page only</td><td>Images are shown on just this page. The rest of the site stays hidden.</td></tr>
+    <tr><td>Keep hiding images on this page</td><td>Appears when the whole site is set to show images. Keeps images hidden on this one page anyway.</td></tr>
+    <tr><td>Hide small icons &amp; logos too</td><td>Normally tiny images (icons, buttons, logos) are left alone. Turn this on to hide them too.</td></tr>
+    <tr><td>Pause this tab</td><td>Shows all images in this tab until you unpause it or close the tab.</td></tr>
+    <tr><td>Show all images this time</td><td>Shows everything on this page until you reload or leave it.</td></tr>
+    <tr><td>Pause everywhere</td><td>Turns hiding off in every tab until you unpause.</td></tr>
+  </table>
+  <p>The box at the top of the popup tells you whether images are hidden or shown on the page, and which rule decided it.</p>
+  <p>Clicking a button marked ✓ again undoes it.</p>
+
+  <h2>3. Several pages at once: the Settings page</h2>
+  <p>Open it from the popup (<i>Manage lists &amp; settings…</i>). There are two lists, one entry per line:</p>
+  <ul>
+    <li><b>Show images on…</b> sites and pages where images are shown.</li>
+    <li><b>Always hide images on…</b> pages where images stay hidden, <i>even if the whole site is in the first list</i>.</li>
+  </ul>
+
+  <h3>How to write an entry</h3>
+  <table>
+    <tr><th>You type</th><th>It covers</th></tr>
+    <tr><td><code>contoso.com</code></td><td>The whole site, including subdomains like shop.contoso.com</td></tr>
+    <tr><td><code>contoso.com/home.html</code></td><td>Exactly that one page. Endings like <code>?ref=email</code> or <code>#contact</code> are ignored.</td></tr>
+    <tr><td><code>contoso.com/</code></td><td>Only the site’s front page</td></tr>
+    <tr><td><code>contoso.com/blog/*</code></td><td>Every page whose address starts with contoso.com/blog/</td></tr>
+    <tr><td><code>recipes</code></td><td>Any address containing the word “recipes”</td></tr>
+  </table>
+  <p>You can paste full addresses (https://www.contoso.com/home.html). They are tidied up when you save.</p>
+
+  <h3>Examples</h3>
+  <table>
+    <tr><th>You want</th><th>Put in “Show images on”</th><th>Put in “Always hide”</th></tr>
+    <tr><td>Images only on a few pages of a site</td><td><code>contoso.com/home.html</code><br><code>contoso.com/about.html</code></td><td>(nothing)</td></tr>
+    <tr><td>Images everywhere on a site except some pages</td><td><code>contoso.com</code></td><td><code>contoso.com/home.html</code><br><code>contoso.com/news/*</code></td></tr>
+    <tr><td>Images in one section of a site</td><td><code>contoso.com/gallery/*</code></td><td>(nothing)</td></tr>
+  </table>
+
+  <h3>Which rule wins?</h3>
+  <ol>
+    <li>If the page matches <b>Always hide</b> → images are hidden.</li>
+    <li>Otherwise, if it matches <b>Show images on</b> → images are shown.</li>
+    <li>Otherwise → images are hidden (the default).</li>
+  </ol>
+
+  <h2>4. Small images</h2>
+  <p>By default, images smaller than 48 pixels stay visible so buttons and menus stay usable. On the Settings page
+     you can change that size, or tick <i>Hide small icons and logos too</i> to hide everything.</p>
+  <p>Not covered: icons drawn with special fonts (they’re text, not images) and the little site icon on the browser tab.</p>
+
+  <h2>Good to know</h2>
+  <ul>
+    <li>Images still download in the background; they’re just not shown. This doesn’t save data.</li>
+    <li>On some pages an image may flash for a split second while the page loads.</li>
+    <li>Extensions can’t run on the browser’s own pages (settings, the extension store, the new tab page).</li>
+    <li>If a page looks wrong, use <i>Pause this tab</i> or <i>Show all images this time</i>.</li>
+  </ul>
+
+  <h2>Privacy</h2>
+  <p>This extension has no network access, no analytics and no remote code. Your settings and lists are stored only in
+     this browser and never leave it.</p>
+
+  <p><a href="options.html">Open Settings →</a></p>
+</body>
+</html>
