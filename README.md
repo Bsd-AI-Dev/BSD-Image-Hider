@@ -42,5 +42,13 @@ firefox/       Manifest V3 build for Firefox (background scripts, gecko settings
 ```
 Both folders share the same code. Only `manifest.json` and the per-folder README differ.
 
+## Publishing a new version
+Releases are created automatically by GitHub Actions (`.github/workflows/release.yml`):
+1. Change the code in **both** `chrome-edge/` and `firefox/`. Only `manifest.json` and `README.md` differ between them.
+2. Raise `"version"` in **both** `manifest.json` files to the same new number (e.g. `1.3.1` → `1.4.0`).
+3. Push to `main`. GitHub builds the two zips, creates the tag `v<version>` and publishes the release.
+
+If the two versions don't match, the workflow stops with an error. You can also run it by hand from the **Actions** tab ("Release" → **Run workflow**).
+
 ## License
 MIT. See [LICENSE](LICENSE).

@@ -1,9 +1,9 @@
-# Private Image Hider (Chrome & Edge version)
+# BSD Image Hider (Chrome & Edge version)
 
 Hides images behind a grey striped texture, like WizMage, but with no ability to send data anywhere.
 
 ## Install in Edge or Chrome
-1. Unzip this folder somewhere permanent (e.g. Documents\private-image-hider). Don't delete it later: Edge loads the extension from this folder.
+1. Unzip this folder somewhere permanent (e.g. Documents\bsd-image-hider). Don't delete it later: Edge loads the extension from this folder.
 2. Open `edge://extensions` (Edge) or `chrome://extensions` (Chrome)
 3. Turn on **Developer mode** (bottom-left in Edge, top-right in Chrome)
 4. Click **Load unpacked** and choose the folder
@@ -32,4 +32,4 @@ Quick summary:
 Note: like WizMage, this does not save bandwidth. Images still download; they just aren't shown.
 
 ## Verify network activity yourself
-`edge://extensions` → Private Image Hider → "Inspect views: service worker" → Network tab. It should stay empty.
+`edge://extensions` → BSD Image Hider → "Inspect views: service worker" → Network tab. It should stay empty.

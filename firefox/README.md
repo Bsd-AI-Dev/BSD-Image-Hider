@@ -1,4 +1,4 @@
-# Private Image Hider (Firefox version)
+# BSD Image Hider (Firefox version)
 
 Hides images behind a grey striped texture, like WizMage, but with no ability to send data anywhere.
 
@@ -20,7 +20,7 @@ Mozilla signs it automatically within minutes, and you download a signed `.xpi`.
 then open `about:addons` → gear icon → **Install Add-on From File** and pick the zip (rename it to `.xpi` first).
 
 ### If images aren't hidden
-Open `about:addons` → Private Image Hider → **Permissions** tab and make sure
+Open `about:addons` → BSD Image Hider → **Permissions** tab and make sure
 "Access your data for all websites" is turned on. Firefox asks for this because the extension
 needs to run on every page to hide images. It still has no ability to send anything out.
 
@@ -45,4 +45,4 @@ Quick summary:
 Note: like WizMage, this does not save bandwidth. Images still download; they just aren't shown.
 
 ## Verify network activity yourself
-`about:debugging#/runtime/this-firefox` → Private Image Hider → **Inspect** → Network tab. It should stay empty.
+`about:debugging#/runtime/this-firefox` → BSD Image Hider → **Inspect** → Network tab. It should stay empty.

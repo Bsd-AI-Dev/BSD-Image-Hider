@@ -1,0 +1,64 @@
+# Creates a GitHub Release automatically when the version in manifest.json changes.
+# To publish a new version: bump "version" in BOTH chrome-edge/manifest.json and firefox/manifest.json, then push to main.
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'chrome-edge/manifest.json'
+      - 'firefox/manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read version
+        id: v
+        run: |
+          CV=$(jq -r .version chrome-edge/manifest.json)
+          FV=$(jq -r .version firefox/manifest.json)
+          if [ "$CV" != "$FV" ]; then
+            echo "::error::Version mismatch: chrome-edge is $CV, firefox is $FV. Make them the same."
+            exit 1
+          fi
+          echo "version=$CV" >> "$GITHUB_OUTPUT"
+
+      - name: Check whether this version was already released
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v${{ steps.v.outputs.version }}" >/dev/null 2>&1; then
+            echo "Release v${{ steps.v.outputs.version }} already exists, nothing to do."
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build zips
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          V=${{ steps.v.outputs.version }}
+          (cd chrome-edge && zip -qr "../bsd-image-hider-chrome-edge-v$V.zip" .)
+          (cd firefox && zip -qr "../bsd-image-hider-firefox-v$V.zip" .)
+          ls -la *.zip
+
+      - name: Create release
+        if: steps.check.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V=${{ steps.v.outputs.version }}
+          gh release create "v$V" \
+            "bsd-image-hider-chrome-edge-v$V.zip" \
+            "bsd-image-hider-firefox-v$V.zip" \
+            --target "${{ github.sha }}" \
+            --title "BSD Image Hider v$V" \
+            --notes-file .github/release-notes.md

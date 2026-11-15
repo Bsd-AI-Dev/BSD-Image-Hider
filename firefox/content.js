@@ -1,6 +1,6 @@
 // Works in Chrome/Edge (chrome.*) and Firefox (browser.*)
 const api = globalThis.browser || globalThis.chrome;
-// Private Image Hider — content script.
+// BSD Image Hider — content script.
 // Runs in every page. It only reads the page's own layout and toggles CSS classes.
 // It never reads form fields, cookies or page text, and makes no network requests.
 (() => {

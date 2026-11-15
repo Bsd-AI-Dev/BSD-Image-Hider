@@ -1,4 +1,4 @@
-// Private Image Hider — shared matching rules (used by the content script, popup and options page).
+// BSD Image Hider — shared matching rules (used by the content script, popup and options page).
 //
 // Entry formats (in either list):
 //   contoso.com            whole site, including subdomains (shop.contoso.com)

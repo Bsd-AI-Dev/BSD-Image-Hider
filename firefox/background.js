@@ -1,6 +1,6 @@
 // Works in Chrome/Edge (chrome.*) and Firefox (browser.*)
 const api = globalThis.browser || globalThis.chrome;
-// Private Image Hider — background script.
+// BSD Image Hider — background script.
 // Holds the per-tab pause list (cleared when the browser closes). No network code anywhere.
 
 const DEFAULTS = { paused: false, exceptions: [], hideList: [], hideSmall: false, minSize: 48 };
