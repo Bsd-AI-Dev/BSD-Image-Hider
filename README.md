@@ -31,6 +31,7 @@ Download the zip for your browser from the [Releases](../../releases) page, or u
 - **No network code:** no `fetch`, `XMLHttpRequest`, `WebSocket` or `sendBeacon`. The extension's pages also block network calls via `connect-src 'none'`.
 - **No remote code:** no analytics, no third-party libraries. Everything is in this repo.
 - **What the content script touches:** it reads only image sizes and background images and toggles CSS classes. It never reads text, forms or cookies.
+- **`shadow-hook.js`:** a 15-line helper that runs inside the page and only announces when a page component creates a "shadow root", so images inside components get hidden too. It reads nothing and sends nothing.
 
 You can verify it yourself: open the extension's background page in the browser's developer tools and watch the Network tab. It stays empty.
 
