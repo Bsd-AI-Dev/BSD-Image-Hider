@@ -1,23 +1,38 @@
-body { width: 280px; margin: 0; padding: 10px; font: 13px system-ui, sans-serif; color: #222; }
-.head { font-weight: 600; margin-bottom: 2px; display: flex; justify-content: space-between; align-items: center; }
+body { width: 300px; margin: 0; padding: 12px; font: 13px/1.4 system-ui, sans-serif; color: #1d2433; }
+.head { font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
 .help { font-weight: 400; font-size: 12px; }
-.site { color: #666; font-size: 12px; margin-bottom: 6px; word-break: break-all; }
-.status { font-size: 12px; padding: 6px 8px; border-radius: 6px; background: #eef3ff; margin-bottom: 6px; }
-.status.shown { background: #e8f6ea; }
-.group { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #888; margin: 10px 0 2px; }
-button { display: block; width: 100%; margin: 4px 0; padding: 7px 8px; text-align: left;
-  border: 1px solid #ccd; border-radius: 6px; background: #f6f7f9; cursor: pointer; font: inherit; color: inherit; }
-button:hover { background: #eceef2; }
-button:disabled { opacity: .5; cursor: default; }
-button.on { background: #fff3d6; border-color: #e6c46a; }
-button.warn.on { background: #fde4e4; border-color: #e19a9a; }
+.site { color: #5b6475; font-size: 12px; margin: 2px 0 8px; word-break: break-all; }
+.status { font-size: 12px; padding: 8px 10px; border-radius: 8px; margin-bottom: 10px; }
+.status b { display: block; font-size: 13px; }
+.status.show { background: #e6f4ea; color: #155a2b; }
+.status.hide { background: #e9effe; color: #1c3a8f; }
+.status.all { background: #e7e9ee; color: #1d2433; }
+.status.paused { background: #fff4dc; color: #6e4300; }
+.row-head { display: flex; justify-content: space-between; font-weight: 600; margin-top: 8px; }
+.muted { color: #5b6475; font-weight: 400; font-size: 12px; }
+.seg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; padding: 3px; margin-top: 4px; background: #eef0f4; border-radius: 8px; }
+.seg button { height: 34px; border: 0; border-radius: 6px; background: transparent; color: #4a5263; font: inherit; font-size: 12px; cursor: pointer; }
+.seg button:hover { background: #e2e5eb; }
+.seg button.on { background: #fff; font-weight: 700; box-shadow: 0 1px 3px rgba(16,24,40,.18); }
+.seg button.on[data-mode="show"] { color: #1e7a3d; }
+.seg button.on[data-mode="hide"] { color: #2a5bd7; }
+.seg button.on[data-mode="all"] { color: #1d2433; }
+.seg button:disabled { opacity: .5; cursor: default; }
+.hint { color: #5b6475; font-size: 12px; margin-top: 3px; }
+hr { border: 0; border-top: 1px solid #e3e6ec; margin: 12px 0 8px; }
+button.wide { display: block; width: 100%; margin: 4px 0; padding: 8px 10px; text-align: left; border: 1px solid #d9dde5; border-radius: 7px; background: #fff; color: inherit; font: inherit; cursor: pointer; }
+button.wide:hover { background: #f4f5f8; }
+button.wide.on { background: #fff4dc; border-color: #e0b64f; color: #6e4300; font-weight: 600; }
 .links { margin-top: 10px; font-size: 12px; }
 a { color: #2a5bd7; }
-@media (prefers-color-scheme: dark) {
-  body { background: #222; color: #eee; } .site { color: #aaa; }
-  .status { background: #2a3350; } .status.shown { background: #23402a; }
-  button { background: #333; border-color: #555; } button:hover { background: #3c3c3c; }
-  button.on { background: #4a3d16; border-color: #8a7120; } button.warn.on { background: #4a2020; border-color: #8a3a3a; }
-  a { color: #8ab4ff; }
-}
 [hidden] { display: none !important; }
+@media (prefers-color-scheme: dark) {
+  body { background: #202124; color: #e8eaed; } .site, .muted, .hint { color: #a0a6b1; }
+  .status.show { background: #1f3b27; color: #b9e3c4; } .status.hide { background: #24304f; color: #c3d2fb; }
+  .status.all { background: #33363d; color: #e8eaed; } .status.paused { background: #45371a; color: #f3d99c; }
+  .seg { background: #303134; } .seg button { color: #c4c8cf; } .seg button:hover { background: #3c3d41; }
+  .seg button.on { background: #4a4c52; box-shadow: none; }
+  .seg button.on[data-mode="show"] { color: #8fd6a3; } .seg button.on[data-mode="hide"] { color: #a8c1ff; } .seg button.on[data-mode="all"] { color: #fff; }
+  hr { border-color: #3c3d41; } button.wide { background: #2a2b2e; border-color: #4a4c52; } button.wide:hover { background: #333438; }
+  button.wide.on { background: #45371a; border-color: #8a7120; color: #f3d99c; } a { color: #8ab4ff; }
+}

@@ -28,8 +28,10 @@ const api = globalThis.browser || globalThis.chrome;
     api.runtime.sendMessage({ q: 'state' }).then(st => {
       if (!st) return;
       const pageUrl = (window.top === window) ? location.href : (document.referrer || location.href);
-      enabled = !st.paused && !st.tabPaused && PIH.decide(pageUrl, st).hidden;
-      const newMin = st.hideSmall ? 0 : (Number(st.minSize) || 0);
+      const mode = PIH.decide(pageUrl, st).mode;           // 'show' | 'hide' | 'all'
+      enabled = !st.paused && !st.tabPaused && mode !== 'show';
+      const everything = mode === 'all';                    // "Hide everything": small icons and SVGs too
+      const newMin = everything ? 0 : (Number(st.minSize) || 0);
       if (newMin !== MIN) {
         // size rule changed: forget earlier small/background decisions and re-check everything
         MIN = newMin;
@@ -38,7 +40,7 @@ const api = globalThis.browser || globalThis.chrome;
           scope.querySelectorAll('.pih-bg').forEach(el => el.classList.remove('pih-bg'));
         }
       }
-      hideSvg = !!st.hideSmall;
+      hideSvg = everything;
       setClass(root, 'pih-svg', hideSvg);
       setClass(root, 'pih-on', enabled);
       updateShadowStyles();

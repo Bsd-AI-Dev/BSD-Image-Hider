@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BSD Image Hider",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Hides images behind a texture. Fully offline: no network access, no analytics, no remote code.",
   "permissions": [
     "storage",

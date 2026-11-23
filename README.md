@@ -6,10 +6,13 @@ It's inspired by WizMage but was written from scratch, with one rule: **it can n
 Available for **Chrome, Edge** and **Firefox**.
 
 ## Features
-- Hides images, CSS background images and videos. Small icons and logos can stay visible, or you can hide them too.
+- Three modes, set per **site**, **page** or **section** (`site.com/blog/*`), or as the default for all other sites:
+  - **Show images**: nothing is hidden
+  - **Hide images**: pictures hidden, small icons and logos kept visible
+  - **Hide everything**: pictures, small icons, logos and SVG icons all hidden
+- The most specific rule wins (page → section → site → default).
+- Hides images, CSS background images, videos, lazy-loaded images and images inside page components.
 - Hover any image and click 👁 to reveal it, or press Alt+A / Alt+Z.
-- Show images on a **whole site**, on **single pages**, or on **sections** (`site.com/blog/*`).
-- **Always-hide list:** keep images hidden on chosen pages even when their site is allowed.
 - Pause per tab, pause everywhere, or show everything once.
 - A built-in **How to use** guide opens on install and is always available from the popup.
 

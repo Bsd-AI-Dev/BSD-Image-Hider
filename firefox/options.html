@@ -7,15 +7,33 @@
 </head>
 <body>
   <h1>BSD Image Hider – Settings</h1>
-  <p class="muted">New here? <a href="help.html" target="_blank">Read how to use the extension</a>.</p>
+  <p class="muted">New here? <a href="help.html" target="_blank">Read how to use the extension</a>. Changes are saved automatically.</p>
 
-  <h2>Show images on…</h2>
-  <p>Sites or pages where images are <b>shown</b>. Everywhere else they are hidden. One entry per line.</p>
-  <textarea id="showList" rows="8" spellcheck="false" placeholder="contoso.com&#10;fabrikam.com/home.html&#10;fabrikam.com/gallery/*"></textarea>
+  <h2>Default for all other sites</h2>
+  <p>Used on every site and page that has no rule of its own below.</p>
+  <label class="choice"><input type="radio" name="defaultMode" value="hide"> <b>Hide images</b>, keep small icons and logos visible</label>
+  <label class="choice"><input type="radio" name="defaultMode" value="all"> <b>Hide everything</b>, including small icons, logos and SVG icons</label>
+  <p id="sizeRow">In “Hide images” mode, keep images visible when smaller than
+     <input type="number" id="minSize" min="0" max="500"> pixels</p>
 
-  <h2>Always hide images on…</h2>
-  <p>Pages where images stay <b>hidden</b> even if the site is in the list above. This list always wins.</p>
-  <textarea id="hideList" rows="6" spellcheck="false" placeholder="contoso.com/home.html&#10;contoso.com/news/*"></textarea>
+  <h2>Your rules</h2>
+  <p>Give a whole site, a single page or a section its own mode. You can also set these from the toolbar popup.</p>
+  <table id="rulesTable">
+    <thead><tr><th>Site or page</th><th>Covers</th><th>Mode</th><th></th></tr></thead>
+    <tbody id="rules"></tbody>
+  </table>
+  <p id="noRules" class="muted" hidden>No rules yet. Every site uses the default above.</p>
+
+  <div class="add">
+    <input id="newTarget" placeholder="Site or page address, e.g. contoso.com/blog/*" aria-label="Site or page address">
+    <select id="newMode" aria-label="Mode for the new rule">
+      <option value="hide">Hide images</option>
+      <option value="all">Hide everything</option>
+      <option value="show">Show images</option>
+    </select>
+    <button id="addRule">Add rule</button>
+    <span id="status" class="status"></span>
+  </div>
 
   <table class="formats">
     <tr><th>You type</th><th>It covers</th></tr>
@@ -25,14 +43,12 @@
     <tr><td><code>contoso.com/blog/*</code></td><td>Every page whose address starts with contoso.com/blog/</td></tr>
     <tr><td><code>recipes</code></td><td>Any address containing the word “recipes”</td></tr>
   </table>
-  <p class="muted">You can paste full addresses like https://www.contoso.com/home.html; they’re tidied up when you save.</p>
-  <div><button id="save">Save lists</button> <span id="status" class="status"></span></div>
+  <p class="muted">You can paste full addresses like https://www.contoso.com/home.html; they’re tidied up automatically.</p>
 
-  <h2>Small images</h2>
-  <label><input type="checkbox" id="hideSmall"> Hide small icons and logos too (including inline SVG icons)</label>
-  <p id="sizeRow">Otherwise, keep images visible when narrower or shorter than
-     <input type="number" id="minSize" min="0" max="500"> px</p>
-  <div><button id="saveSize">Save</button> <span id="sizeStatus" class="status"></span></div>
+  <h2>Which rule wins?</h2>
+  <p>The most specific one: <b>page</b> → <b>section</b> (<code>/blog/*</code>) → <b>site</b> → <b>word</b> → <b>default</b>.
+     For example, with <code>contoso.com</code> set to <i>Hide everything</i> and <code>contoso.com/weather/*</code> set to
+     <i>Show images</i>, images are shown on contoso.com/weather/today and hidden everywhere else on contoso.com.</p>
 
   <h2>Privacy</h2>
   <p>This extension has no network access, no analytics and no remote code. Settings are stored only in this browser.</p>

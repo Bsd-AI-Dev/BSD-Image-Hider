@@ -16,11 +16,10 @@ A full **How to use** guide is built into the extension. It opens automatically 
 any time from the popup (**? Help**) or the Settings page.
 
 Quick summary:
+- Three modes: **Show images**, **Hide images** (small icons stay visible), **Hide everything**
+- Popup: set the mode for this site or this page, pause this tab, show all once, pause everywhere
+- Settings page: default mode for all other sites, all your rules in one list, small-icon size
 - Hover an image and click 👁 to show it, ↺ to hide it again (or Alt+A / Alt+Z)
-- Popup: show images on the whole site or on this page only, keep hiding a page even when its site is shown,
-  hide small icons too, pause this tab, show all once, pause everywhere
-- Settings page: two lists ("Show images on…" and "Always hide images on…") for managing many sites and pages,
-  plus the small-image size setting
 
 ## Why it's private (check this yourself)
 - **Permissions:** only `storage` (saves your settings locally) and `activeTab` (lets the popup see the current site's name when you click it). No `tabs`, `history`, `cookies`, `webRequest` or `host_permissions`.

@@ -7,20 +7,34 @@
 <body>
   <div class="head">BSD Image Hider <a id="help" class="help" href="#" title="How to use">? Help</a></div>
   <div id="page" class="site"></div>
-  <div id="status" class="status"></div>
+  <div id="status" class="status" role="status"></div>
 
-  <div class="group">Show images</div>
-  <button id="showSite"></button>
-  <button id="showPage"></button>
-  <button id="hidePage" hidden></button>
+  <div id="controls">
+    <div class="row-head"><span>This site</span><span id="siteName" class="muted"></span></div>
+    <div class="seg" id="siteSeg" role="group" aria-label="Mode for this site">
+      <button data-mode="show">Show</button>
+      <button data-mode="hide">Hide</button>
+      <button data-mode="all">Hide all</button>
+      <button data-mode="">Default</button>
+    </div>
+    <div id="siteHint" class="hint"></div>
 
-  <div class="group">Options</div>
-  <button id="hideSmall"></button>
-  <button id="tabPause"></button>
-  <button id="showAll">Show all images this time</button>
-  <button id="pause"></button>
+    <div class="row-head"><span>This page only</span></div>
+    <div class="seg" id="pageSeg" role="group" aria-label="Mode for this page">
+      <button data-mode="show">Show</button>
+      <button data-mode="hide">Hide</button>
+      <button data-mode="all">Hide all</button>
+      <button data-mode="">As site</button>
+    </div>
+    <div id="pageHint" class="hint"></div>
+  </div>
 
-  <div class="links"><a id="options" href="#">Manage lists &amp; settings…</a> · <a id="help2" href="#">How to use</a></div>
+  <hr>
+  <button id="tabPause" class="wide"></button>
+  <button id="showAll" class="wide">Show all images on this page once</button>
+  <button id="pause" class="wide"></button>
+
+  <div class="links"><a id="options" href="#">Settings &amp; rules</a> · <a id="help2" href="#">How to use</a></div>
   <script src="rules.js"></script>
   <script src="popup.js"></script>
 </body>

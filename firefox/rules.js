@@ -6,7 +6,7 @@
 //   contoso.com/blog/*     every page that starts with contoso.com/blog/
 //   recipes                any address containing the word "recipes"
 //
-// Decision order: "Always hide" list  →  "Show images" list  →  hidden (default)
+// Each rule has a mode. The most specific matching rule wins (see decide below).
 (() => {
   'use strict';
 
@@ -59,15 +59,34 @@
     }
   }
 
-  // Returns { hidden, list: 'hide' | 'show' | null, rule }
+  // Modes: 'show' (nothing hidden), 'hide' (pictures hidden, small icons kept), 'all' (everything hidden).
+  // The MOST SPECIFIC matching rule wins: page > section > site > word > default.
+  const SCORE = { page: 4, section: 3, site: 2, word: 1 };
+  const MODES = ['show', 'hide', 'all'];
+
+  // Returns { mode, rule, kind }  (kind 'default' when no rule matched)
   function decide(url, settings) {
-    const hideList = settings.hideList || [], showList = settings.exceptions || [];
-    const h = hideList.find(e => matches(url, e));
-    if (h) return { hidden: true, list: 'hide', rule: h };
-    const s = showList.find(e => matches(url, e));
-    if (s) return { hidden: false, list: 'show', rule: s };
-    return { hidden: true, list: null, rule: null };
+    let best = null, bestScore = -1;
+    for (const r of settings.rules || []) {
+      if (!r || !MODES.includes(r.mode) || !matches(url, r.target)) continue;
+      const e = clean(r.target);
+      const score = SCORE[kind(e)] * 100000 + e.length;   // longer = more specific within a kind
+      if (score > bestScore) { best = r; bestScore = score; }
+    }
+    if (best) return { mode: best.mode, rule: clean(best.target), kind: kind(best.target) };
+    return { mode: settings.defaultMode === 'all' ? 'all' : 'hide', rule: null, kind: 'default' };
   }
 
-  globalThis.PIH = { siteKey, pageKey, clean, kind, matches, decide };
+  // Turn v1.3 settings (two lists + global switch) into v1.4 rules. Returns null if nothing to do.
+  function migrate(s) {
+    if (Array.isArray(s.rules)) return null;
+    const rules = [], seen = new Set();
+    const add = (t, mode) => { const c = clean(t); if (c && !seen.has(c)) { seen.add(c); rules.push({ target: c, mode }); } };
+    const hideMode = s.hideSmall ? 'all' : 'hide';           // keep v1.3 behaviour exactly
+    (s.hideList || []).forEach(t => add(t, hideMode));     // "always hide" used to win, so it goes first
+    (s.exceptions || []).forEach(t => add(t, 'show'));
+    return { rules, defaultMode: s.hideSmall ? 'all' : 'hide' };
+  }
+
+  globalThis.PIH = { siteKey, pageKey, clean, kind, matches, decide, migrate, MODES };
 })();
